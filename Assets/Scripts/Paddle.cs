@@ -21,7 +21,7 @@ public class Paddle : MonoBehaviour
     void Update()
     {
         Vector2 paddlePos;
-        if (gameSession.IsAutoPlay())
+        if (false)// gameSession.IsAutoPlay())
         {
             var ballPosition = ball.gameObject.transform.position;
             paddlePos = new Vector2(ballPosition.x, transform.position.y);
