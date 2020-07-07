@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace Assets.Scripts
 {
-    public void LoadNextScene()
+    class SceneLoader : MonoBehaviour
     {
-        var currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex + 1);
-    }
-
-    public void LoadStartScene()
-    {
-        SceneManager.LoadScene(0);
-        var gameStatus = FindObjectOfType<GameSession>();
-        gameStatus.DestroyGameStatus();
     }
 }

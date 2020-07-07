@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
@@ -17,16 +15,14 @@ public class Ball : MonoBehaviour
     private AudioSource myAudioSource;
     private Rigidbody2D myRigidbody2D;
 
-
-
-    void Start ()
+    void Start()
     {
         paddleToBallVector = transform.position - paddle1.transform.position;
         myAudioSource = GetComponent<AudioSource>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    void Update ()
+    void Update()
     {
         if (!hasStarted)
         {

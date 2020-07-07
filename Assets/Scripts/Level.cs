@@ -1,28 +1,13 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Level : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] int breakableBlocks = 0;
-
-    private void Update()
+    class Level : MonoBehaviour
     {
-        if (breakableBlocks == 0)
-        {
-            var currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.buildIndex + 1);
-        }
-    }
-
-    public void AddBlock()
-    {
-        breakableBlocks++;
-    }
-
-    public void RemoveBlock()
-    {
-        breakableBlocks--;
     }
 }
