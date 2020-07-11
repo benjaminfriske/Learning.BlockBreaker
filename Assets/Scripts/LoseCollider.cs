@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
     class LoseCollider : MonoBehaviour
     {
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log(collision.name);
+            SceneManager.LoadScene("Game Over");
+        }
     }
 }

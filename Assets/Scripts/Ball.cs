@@ -1,63 +1,67 @@
 ﻿using UnityEngine;
 
-public class Ball : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] Paddle paddle1;
-    [SerializeField] float launchLocationX = 2f;
-    [SerializeField] float launchLocationY = 15f;
-    [SerializeField] AudioClip[] ballSounds;
-    [SerializeField] float randomFactor = .5f;
-
-    Vector2 paddleToBallVector;
-    private bool hasStarted = false;
-
-    //cached variable
-    private AudioSource myAudioSource;
-    private Rigidbody2D myRigidbody2D;
-
-    void Start()
+    public class Ball : MonoBehaviour
     {
-        paddleToBallVector = transform.position - paddle1.transform.position;
-        myAudioSource = GetComponent<AudioSource>();
-        myRigidbody2D = GetComponent<Rigidbody2D>();
-    }
+        [SerializeField] Paddle paddle1;
+        [SerializeField] float launchLocationX = 2f;
+        [SerializeField] float launchLocationY = 15f;
+        [SerializeField] AudioClip[] ballSounds;
+        [SerializeField] float randomFactor = .5f;
 
-    void Update()
-    {
-        if (!hasStarted)
+        Vector2 paddleToBallVector;
+        private bool hasStarted = false;
+
+        //cached variable
+        private AudioSource myAudioSource;
+        private Rigidbody2D myRigidbody2D;
+
+        void Start()
         {
-            LockBallToPaddle();
-            LauchBall();
+            paddleToBallVector = transform.position - paddle1.transform.position;
+            myAudioSource = GetComponent<AudioSource>();
+            myRigidbody2D = GetComponent<Rigidbody2D>();
         }
-    }
 
-    private void LauchBall()
-    {
-        if (Input.GetMouseButtonDown(0))
+        void Update()
         {
-            hasStarted = true;
-            myRigidbody2D.velocity = new Vector2(launchLocationX, launchLocationY);
+            if (!hasStarted)
+            {
+                LockBallToPaddle();
+                LauchBall();
+            }
         }
-    }
 
-    private void LockBallToPaddle()
-    {
-        Vector2 paddlePosition = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
-        transform.position = new Vector2(paddlePosition.x, paddlePosition.y + paddleToBallVector.y);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Vector2 velocityTweak = new Vector2(
-            Random.Range(0, randomFactor),
-            Random.Range(0, randomFactor)
-            );
-
-        if (hasStarted)
+        private void LauchBall()
         {
-            AudioClip clip = ballSounds[Random.Range(0, ballSounds.Length)];
-            myRigidbody2D.velocity += velocityTweak;
-            myAudioSource.PlayOneShot(clip);
+            if (Input.GetMouseButtonDown(0))
+            {
+                hasStarted = true;
+                myRigidbody2D.velocity = new Vector2(launchLocationX, launchLocationY);
+            }
+        }
+
+        private void LockBallToPaddle()
+        {
+            Vector2 paddlePosition = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
+            transform.position = new Vector2(paddlePosition.x, paddlePosition.y + paddleToBallVector.y);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            Vector2 velocityTweak = new Vector2(
+                Random.Range(0, randomFactor),
+                Random.Range(0, randomFactor)
+                );
+
+            if (hasStarted)
+            {
+                AudioClip clip = ballSounds[Random.Range(0, ballSounds.Length)];
+                myRigidbody2D.velocity += velocityTweak;
+                myAudioSource.PlayOneShot(clip);
+            }
         }
     }
 }
+
